@@ -5,6 +5,10 @@ import markdown from 'remark-parse';
 import html from 'remark-html';
 
 const convertToHTML = (chapterMd) => {
+    if (!chapterMd) {
+        return '';
+    }
+
     let chapterHTML;
     unified()
         .use(markdown)

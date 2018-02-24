@@ -12,4 +12,6 @@ Frontend:
 
 Installing:
 ---------
-`npm i` should get you what you need.
+1. install Node
+2. install monogo db
+3. `npm i` should get you what you need.

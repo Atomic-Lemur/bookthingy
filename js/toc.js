@@ -19,6 +19,11 @@ const toc = {
         const new_chapter_el = document.querySelector(`.new_chapter_li`);
         const chapter_title  = document.querySelector(`#new_chapter`).value;
 
+        if (!new_chapter_el || !chapter_title) {
+            alert('You must give the chapter a name');
+            return;
+        }
+
         return fetch('/', {
             method: 'POST',
             body: JSON.stringify({chapter: {title: chapter_title}}),
