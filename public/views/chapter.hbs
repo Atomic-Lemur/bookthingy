@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bookthingy</title>
+    <link href="https://fonts.googleapis.com/css?family=Comfortaa:700|Lato:300i" rel="stylesheet">
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+    <nav>
+        <h1>Bookthingy</h1>
+        <div id="nav_options">
+            <a id="toc" class="nav_controls" href="/"><i class="fas fa-book"></i></a>
+            <a id="edit" class="nav_controls"><i class="fas fa-edit"></i></a>
+            <a id="download" class="nav_controls"><i class="fas fa-download"></i></a>
+            <a id="share" class="nav_controls"><i class="fas fa-share-square"></i></a>
+            <a id="delete" class="nav_controls"><i class="fas fa-trash"></i></a>
+            <a id="settings" class="nav_controls"><i class="fas fa-cog"></i></a>
+        </div>
+    </nav>
+    <content>
+        <h2 id="chapter_title">{{chapter.title}}</h2>
+        <div id="chapter_content">{{{chapter.content_html}}}</div>
+    </content>
+
+    <script src="/js/chapterEditor.js"></script>
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', chapterEditor.init());
+    </script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+</body>
+</html>
