@@ -5,6 +5,10 @@ import markdown from 'remark-parse';
 import html from 'remark-html';
 
 const convertToHTML = (chapterMd) => {
+    if (!chapterMd) {
+        return null;
+    }
+
     let chapterHTML;
     unified()
         .use(markdown)
@@ -20,7 +24,6 @@ const ApiController = {};
 
 ApiController.getAll = async (req, res) => {
     try{
-        console.log('trying');
         await Chapter.find().sort('-dateAdded').exec((err, chapters) => {
             if (err) {
                 res.status(500).send(err);

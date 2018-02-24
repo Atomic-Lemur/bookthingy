@@ -28,6 +28,6 @@ app.get("*", (req, res) => {
     res.send("Error: No such page!");
 });
 
-app.listen(config.port, () => {
-    console.log(`server started on port ${config.port}`);
+app.listen(config.server_port, () => {
+    console.log(`server started on port ${config.server_port}`);
 });
