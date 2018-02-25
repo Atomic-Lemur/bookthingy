@@ -4,7 +4,7 @@ const chapterEditor = {
     content_el      : null,
     title           : '',
     content_html    : '',
-    content_markdown: '',
+    content: '',
     is_editing      : false,
 
     init () {
@@ -13,7 +13,7 @@ const chapterEditor = {
         this.content_el       = document.querySelector(`#chapter_content`);
         this.title            = this.title_el.innerHTML || '';
         this.content_html     = this.content_el.innerHTML || '';
-        this.content_markdown = this.content_el.innerHTML || '';
+        this.content = this.content_el.innerHTML || '';
 
         document.querySelector(`#edit`).addEventListener('click', () => this.editChapter());
         document.querySelector(`#download`).addEventListener('click', () => console.log('need download'));
@@ -50,7 +50,7 @@ const chapterEditor = {
     },
 
     editChapterContent () {
-        this.content_el.innerHTML = `<textarea id="edit_content">${this.content_markdown || ''}</textarea>`;
+        this.content_el.innerHTML = `<textarea id="edit_content">${this.content}</textarea>`;
         this.content_el.removeEventListener('click', () => this.editChapterContent());
         return this;
     },
@@ -63,7 +63,7 @@ const chapterEditor = {
 
     doneChapterContent () {
         this.content_html         = document.querySelector(`#edit_content`).value;
-        this.content_markdown     = this.content_html;
+        this.content     = this.content_html;
         this.content_el.innerHTML = this.content_html;
         return this;
     },
@@ -81,21 +81,21 @@ const chapterEditor = {
     },
 
     updateChapter () {
-        if (!this.title || !this.content_markdown) {
+        if (!this.title || !this.content) {
             alert(`There must be a title and content to save.`);
             return;
         }
 
         return fetch(`/${this.cuid}`, {
             method: 'PUT',
-            body: JSON.stringify({chapter: {cuid: this.cuid, title: this.title, content: this.content_markdown}}),
+            body: JSON.stringify({chapter: {cuid: this.cuid, title: this.title, content: this.content}}),
             headers: new Headers({'Content-Type': 'application/json'})
         }).then(res => res.json())
             .catch(error => console.error('Error:', error))
             .then(response => {
                 console.log('success', response);
-                this.content_html     = response.chapter.content_html;
-                this.markdown_content = response.chapter.content_markdown;
+                this.content_html = response.chapter.content_html;
+                this.content      = response.chapter.content;
             });
     },
 
@@ -103,7 +103,7 @@ const chapterEditor = {
         return fetch(`/api/${this.cuid}`)
             .then(res => res.json())
             .catch(error => console.error('Error:', error))
-            .then(response => this.content_markdown = response.chapter.content);
+            .then(response => this.content = response.chapter.content);
     },
 
     deleteChapter () {
