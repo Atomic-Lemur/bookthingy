@@ -99,4 +99,18 @@ const chapterEditor = {
             });
     },
 
+    getChapterMarkdown () {
+        return fetch(`/api/${this.cuid}`)
+            .then(res => res.json())
+            .catch(error => console.error('Error:', error))
+            .then(response => this.content = response.chapter.content);
+    },
+
+    deleteChapter () {
+        return fetch(`/${this.cuid}`, {
+            method: 'DELETE',
+            body: JSON.stringify({chapter: {cuid: this.cuid}}),
+            headers: new Headers({'Content-Type': 'application/json'})
+        }).catch(error => console.error('Error:', error));
+    },
 }
