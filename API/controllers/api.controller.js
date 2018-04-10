@@ -27,7 +27,7 @@ ApiController.getChapter = async (req, res) => {
         });
     }
     catch(err){
-
+        res.send(err);
     }
 }
 

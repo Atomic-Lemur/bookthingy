@@ -39,6 +39,9 @@ nav {
 nav a {
     margin-right: 1rem;
 }
+.hidden {
+    display: none !important;
+}
 main {
     margin: 1rem;
     grid-column: 2;
@@ -54,11 +57,12 @@ input#edit_title, input#new_chapter {
 textarea#edit_content {
     background: none;
     border: 1px dashed #D1DBBD;
+    margin-top: 2rem;
     min-height: 30rem;
     padding: 0.5rem;
     width: 100%;
 }
-#chapter_content{
+#chapter_content, .markdown_content {
     margin-top: 2rem;
 }
 .toc_item, #new_chapter {
