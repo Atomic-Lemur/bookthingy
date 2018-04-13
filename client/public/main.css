@@ -1,52 +1,81 @@
 * {
     font-family: 'Lato', Helvetica, sans-serif;
 }
-html, body, h1, h2, h3, h4, h5, p, div, a {
+html,
+body,
+h1, h2, h3, h4, h5,
+p,
+div,
+a {
     margin: 0;
     padding: 0;
 }
-body {
+#app {
     background: #FCFFF5;
     color: #193441;
     display: grid;
-    grid-template-columns: 1fr 4fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: auto 1fr auto;
     height: 100vh;
 }
-h1, h2, h3, h4, h5, input#edit_title {
+@media all and (max-width: 1200px) {
+    #app {
+        grid-template-columns: 1fr 2fr 1fr;
+    }
+}
+@media all and (max-width: 900px) {
+    #app {
+        grid-template-columns: 1fr 2fr 1fr;
+    }
+}
+@media all and (max-width: 600px) {
+    #app {
+        grid-template-columns: 0.5em 1fr 0.5em;
+    }
+}
+h1, h2, h3, h4, h5,
+input#edit_title {
     color: #193441;
     font-weight: bold;
 }
-a:link, a:visited, .nav_controls {
+a:link,
+a:visited,
+.nav_controls {
     color: #91AA9D;
     text-decoration: none;
 }
-nav {
+header {
     background: #3E606F;
     display: flex;
     grid-column: span 3;
     justify-content: space-between;
     padding: 0.5rem 1rem;
 }
-nav h1 {
+header h1 {
     font-family: 'Comfortaa', cursive;
     font-size: 1rem;
     order: 2;
 }
-nav #nav_options {
+nav {
     order: 1;
 }
-#nav_options a {
+nav a {
     margin-right: 1rem;
 }
-content{
+.hidden {
+    display: none !important;
+}
+main {
     margin: 1rem;
     grid-column: 2;
 }
-h2#chapter_title, input#edit_title {
+h2#chapter_title,
+input#edit_title {
     font-size: 1.4rem;
+    width: 100%;
 }
-input#edit_title, input#new_chapter {
+input#edit_title,
+input#new_chapter {
     background: none;
     border: 0;
     border-bottom: 2px dashed #D1DBBD;
@@ -54,14 +83,17 @@ input#edit_title, input#new_chapter {
 textarea#edit_content {
     background: none;
     border: 1px dashed #D1DBBD;
+    margin-top: 2rem;
     min-height: 30rem;
     padding: 0.5rem;
     width: 100%;
 }
-#chapter_content{
+#chapter_content,
+.markdown_content {
     margin-top: 2rem;
 }
-.toc_item, #new_chapter {
+.toc_item,
+#new_chapter {
     color: #91AA9D;
     font-size: 1.4rem;
 }

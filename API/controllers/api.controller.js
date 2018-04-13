@@ -1,24 +1,5 @@
 import Chapter from '../models/chapter';
 import cuid from 'cuid';
-import unified from 'unified';
-import markdown from 'remark-parse';
-import html from 'remark-html';
-
-const convertToHTML = (chapterMd) => {
-    if (!chapterMd) {
-        return null;
-    }
-
-    let chapterHTML;
-    unified()
-        .use(markdown)
-        .use(html)
-        .process(chapterMd, (err, html) => {
-            if (err) throw err;
-            chapterHTML = String(html);
-        });
-    return chapterHTML;
-}
 
 const ApiController = {};
 
@@ -42,12 +23,11 @@ ApiController.getChapter = async (req, res) => {
             if (err) {
                 res.status(500).send(err);
             }
-            chapter.content_html = convertToHTML(chapter.content);
             res.json({ chapter: chapter });
         });
     }
     catch(err){
-
+        res.send(err);
     }
 }
 
@@ -112,6 +92,22 @@ ApiController.deleteChapter = async (req, res) => {
     }
     catch (err) {
         console.log(err);
+    }
+}
+
+ApiController.exportChapter = async (req, res) => {
+    try {
+        Chapter.findOne({ cuid: req.params.cuid }).exec((err, chapter) => {
+            if (err) {
+                res.status(500).send(err);
+            }
+            res.setHeader("Content-type", "application/octet-stream");
+            res.setHeader("Content-disposition", `attachment; filename="${chapter.title}.txt"`);
+            res.send(`${chapter.title}\n\n${chapter.content}`);
+        });
+    }
+    catch (err) {
+        res.send(err);
     }
 }
 
