@@ -95,4 +95,20 @@ ApiController.deleteChapter = async (req, res) => {
     }
 }
 
+ApiController.exportChapter = async (req, res) => {
+    try {
+        Chapter.findOne({ cuid: req.params.cuid }).exec((err, chapter) => {
+            if (err) {
+                res.status(500).send(err);
+            }
+            res.setHeader("Content-type", "application/octet-stream");
+            res.setHeader("Content-disposition", `attachment; filename="${chapter.title}.txt"`);
+            res.send(`${chapter.title}\n\n${chapter.content}`);
+        });
+    }
+    catch (err) {
+        res.send(err);
+    }
+}
+
 export default ApiController;

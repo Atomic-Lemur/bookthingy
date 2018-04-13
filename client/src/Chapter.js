@@ -69,7 +69,7 @@ class Chapter extends React.Component {
         chapter[event.target.dataset.parameter] = event.target.value;
         this.setState(chapter);
     }
-    
+
     updateChapter () {
         if (!this.state.is_editing) {
             return this.toggleEditState()
@@ -112,7 +112,6 @@ class Chapter extends React.Component {
 
         document.querySelector(`#edit`).addEventListener('click', () => this.saveEditToggle());
         document.querySelector(`#save`).addEventListener('click', () => this.saveEditToggle());
-        document.querySelector(`#download`).addEventListener('click', () => console.log('need download'));
         document.querySelector(`#share`).addEventListener('click', () => console.log('need share'));
         document.querySelector(`#delete`).addEventListener('click', () => {
             this.deleteChapter()
@@ -129,7 +128,7 @@ class Chapter extends React.Component {
             <div>
                 <h2 id="chapter_title">{this.state.chapter.title}</h2>
                 <input id="edit_title" className="hidden" value={this.state.chapter.title} onChange={this.handleChange} data-parameter="title" />
-                
+
                 <ReactMarkdown className="markdown_content" source={this.state.chapter.content} />
                 <textarea id="edit_content" className="hidden" value={this.state.chapter.content} onChange={this.handleChange} data-parameter="content"  />
             </div>
